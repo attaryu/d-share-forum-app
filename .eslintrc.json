@@ -20,6 +20,7 @@
     "rules": {
         "no-alert": "off",
         "linebreak-style": ["error", "windows"],
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "react/jsx-props-no-spreading": "off"
     }
 }
