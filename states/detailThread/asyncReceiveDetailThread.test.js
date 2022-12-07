@@ -64,7 +64,7 @@ describe('test async receive detail thread', () => {
     delete backupApi.seeDetailThread;
   });
   
-  it('failed to receive user data due to non-API error and warning will be triggered', async () => {
+  it('failed to receive detail thread due to non-API error and warning will be triggered', async () => {
     // arrage
     api.seeDetailThread = () => Promise.reject('non-API error');
     const dispatch = jest.fn();
@@ -79,7 +79,7 @@ describe('test async receive detail thread', () => {
     expect(dispatch).toBeCalledWith(hideLoading());
   });
 
-  it('failed to receive user data caused API response and triggered alert', async () => {
+  it('failed to receive detail thread caused API response and triggered alert', async () => {
     // arrage
     api.seeDetailThread = () => Promise.resolve(fakeFailedDetailThreadResponse);
     const dispatch = jest.fn();
@@ -94,7 +94,7 @@ describe('test async receive detail thread', () => {
     expect(dispatch).toBeCalledWith(hideLoading());
   });
 
-  it('success to receive user data and triggered addUserActionCreator', async () => {
+  it('success to receive detail thread will triggered receiveDetailThreadActionCreator', async () => {
     // arrage
     api.seeDetailThread = () => Promise.resolve(fakeSuccessDetailThreadResponse);
     const dispatch = jest.fn();
