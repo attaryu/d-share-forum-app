@@ -12,7 +12,7 @@ import Header from '../../components/Header';
 import HeaderThreadCard from '../../components/HeaderThreadCard';
 import Navigation from '../../components/Navigation';
 
-import { asyncReceiveThreadDetail, removeDetailThreadActionCreator } from '../../states/detailThread/action';
+import { asyncReceiveDetailThread, removeDetailThreadActionCreator } from '../../states/detailThread/action';
 import { asyncReceiveLeaderboards } from '../../states/leaderboards/action';
 import { asyncReceiveUsers } from '../../states/users/action';
 import categorySpliter from '../../utils/categorySpliter';
@@ -28,7 +28,7 @@ function Thread() {
 
   useEffect(() => {
     if (threadId) {
-      dispatch(asyncReceiveThreadDetail(threadId));
+      dispatch(asyncReceiveDetailThread(threadId));
       dispatch(asyncReceiveLeaderboards());
       dispatch(asyncReceiveUsers());
     }

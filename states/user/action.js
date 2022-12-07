@@ -1,12 +1,12 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { seeOwnProfile } from '../../utils/api';
+import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_USER: 'RECEIVE_USER',
   REMOVE_USER: 'REMOVE_USER',
 };
 
-function addUserActionCreator({ user }) {
+function addUserActionCreator({ user = {} }) {
   return {
     type: ActionType.RECEIVE_USER,
     payload: {
@@ -26,7 +26,7 @@ function asyncAddUser() {
     dispatch(showLoading());
 
     try {
-      const data = await seeOwnProfile();
+      const data = await api.seeOwnProfile();
 
       if (data.status === 'fail') alert(data.message);
 

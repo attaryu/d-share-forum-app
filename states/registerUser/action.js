@@ -1,5 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { registerUser } from '../../utils/api';
+import api from '../../utils/api';
 
 const ActionType = {
   ADD_TEMPORARY_DATA_USER: 'ADD_TEMPORARY_DATA_USER',
@@ -19,7 +19,7 @@ function asyncRegisterUser(userForm) {
     dispatch(showLoading());
 
     try {
-      const data = await registerUser(userForm);
+      const data = await api.registerUser(userForm);
 
       if (data.status === 'fail') alert(data.message);
 

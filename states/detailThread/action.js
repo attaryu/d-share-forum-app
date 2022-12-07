@@ -1,7 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import {
-  seeDetailThread, createComment, upVoteComment, downVoteComment, neutralizeVoteComment,
-} from '../../utils/api';
+import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_DETAIL_THREAD: 'RECEIVE_DETAIL_THREAD',
@@ -99,12 +97,12 @@ function removeDetailThreadActionCreator() {
   };
 }
 
-function asyncReceiveThreadDetail(threadId) {
+function asyncReceiveDetailThread(threadId) {
   return async (dispatch) => {
     dispatch(showLoading());
 
     try {
-      const data = await seeDetailThread(threadId);
+      const data = await api.seeDetailThread(threadId);
 
       if (data.status === 'fail') alert(data.message);
 
@@ -123,7 +121,7 @@ function asyncCreateComment(content) {
     const { detailThread } = getState();
 
     try {
-      const data = await createComment(detailThread.id, content);
+      const data = await api.createComment(detailThread.id, content);
       dispatch(createCommentActionCreator(data.data));
     } catch (message) {
       alert('Comment failed to create');
@@ -140,7 +138,7 @@ function asyncUpVoteComment(commentId) {
     dispatch(upVoteCommentActionCreator(commentId, user.id));
 
     try {
-      await upVoteComment(detailThread.id, commentId);
+      await api.upVoteComment(detailThread.id, commentId);
     } catch (message) {
       dispatch(upVoteCommentActionCreator(commentId, user.id));
     }
@@ -156,7 +154,7 @@ function asyncDownVoteComment(commentId) {
     dispatch(downVoteCommentActionCreator(commentId, user.id));
 
     try {
-      await downVoteComment(detailThread.id, commentId);
+      await api.downVoteComment(detailThread.id, commentId);
     } catch (message) {
       dispatch(downVoteCommentActionCreator(commentId, user.id));
     }
@@ -172,7 +170,7 @@ function asyncNeutralizeVoteComment(commentId) {
     dispatch(neutralizeVoteCommentActionCreator(commentId, user.id));
 
     try {
-      await neutralizeVoteComment(detailThread.id, commentId);
+      await api.neutralizeVoteComment(detailThread.id, commentId);
     } catch (message) {
       dispatch(neutralizeVoteCommentActionCreator(commentId, user.id));
     }
@@ -183,10 +181,11 @@ function asyncNeutralizeVoteComment(commentId) {
 
 export {
   ActionType,
+  receiveDetailThreadActionCreator,
   upVoteDetailThreadActionCreator,
   downVoteDetailThreadActionCreator,
   neutralizeVoteDetailThreadActionCreator,
-  asyncReceiveThreadDetail,
+  asyncReceiveDetailThread,
   asyncCreateComment,
   asyncUpVoteComment,
   asyncDownVoteComment,

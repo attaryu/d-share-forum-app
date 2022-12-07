@@ -1,5 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { seeLeaderboards } from '../../utils/api';
+import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_LEADERBOARDS: 'RECEIVE_LEADERBOARDS',
@@ -19,7 +19,7 @@ function asyncReceiveLeaderboards() {
     dispatch(showLoading());
 
     try {
-      const data = await seeLeaderboards();
+      const data = await api.seeLeaderboards();
 
       if (data.status === 'fail') alert(data.message);
 

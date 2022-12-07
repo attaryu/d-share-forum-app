@@ -1,5 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { createThread } from '../../utils/api';
+import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
@@ -62,7 +62,7 @@ function asyncCreateThread({ title, body, category = 'General' }) {
     dispatch(showLoading());
 
     try {
-      const data = await createThread({ title, body, category });
+      const data = await api.createThread({ title, body, category });
 
       if (data.status === 'fail') alert(data.message);
 

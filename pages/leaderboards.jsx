@@ -10,7 +10,7 @@ import TopRankDisplay from '../components/TopRankDisplay';
 
 import { receiveLeaderboardsActionCreator } from '../states/leaderboards/action';
 import { receiveUsersActionCreator } from '../states/users/action';
-import { seeAllUsers, seeLeaderboards } from '../utils/api';
+import api from '../utils/api';
 
 function Leaderboards({ leaderboardsISR, usersISR }) {
   const { leaderboards, users } = useSelector((states) => states);
@@ -64,14 +64,14 @@ Leaderboards.propTypes = {
 export default Leaderboards;
 
 export async function getStaticProps() {
-  const leaderboards = await seeLeaderboards();
-  const users = await seeAllUsers();
+  const leaderboards = await api.seeLeaderboards();
+  const users = await api.seeAllUsers();
 
   return {
     props: {
       leaderboardsISR: leaderboards.data.leaderboards || null,
       usersISR: users.data.users || null,
     },
-    revalidate: 30,
+    revalidate: 10,
   };
 }

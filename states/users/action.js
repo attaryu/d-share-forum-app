@@ -1,5 +1,5 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import { seeAllUsers } from '../../utils/api';
+import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_USERS: 'RECEIVE_USERS',
@@ -19,7 +19,7 @@ function asyncReceiveUsers() {
     dispatch(showLoading());
 
     try {
-      const data = await seeAllUsers();
+      const data = await api.seeAllUsers();
 
       if (data.status === 'fail') alert(data.message);
 

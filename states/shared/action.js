@@ -16,27 +16,18 @@ import {
   neutralizeVoteDetailThreadActionCreator,
 } from '../detailThread/action';
 
-import {
-  login,
-  seeAllThreads,
-  seeAllUsers,
-  seeOwnProfile,
-  seeLeaderboards,
-  upVoteThread,
-  downVoteThread,
-  neutralizeVoteThread,
-} from '../../utils/api';
+import api from '../../utils/api';
 
 function asyncLoginUser({ email, password }) {
   return async (dispatch) => {
     dispatch(showLoading());
 
     try {
-      const logged = await login({ email, password });
+      const logged = await api.login({ email, password });
 
       if (logged.status === 'fail') alert(logged.message);
 
-      const data = await seeOwnProfile();
+      const data = await api.seeOwnProfile();
       dispatch(addUserActionCreator(data.data));
     } catch (message) {
       alert('Login failed');
@@ -51,9 +42,9 @@ function asyncReceiveThreads() {
     dispatch(showLoading());
 
     try {
-      const threads = await seeAllThreads();
-      const users = await seeAllUsers();
-      const leaderboards = await seeLeaderboards();
+      const threads = await api.seeAllThreads();
+      const users = await api.seeAllUsers();
+      const leaderboards = await api.seeLeaderboards();
 
       dispatch(receiveThreadsActionCreator(threads.data));
       dispatch(addCategoryActionCreator(threads.data));
@@ -76,7 +67,7 @@ function asyncUpVoteThread(threadId) {
     dispatch(upVoteDetailThreadActionCreator(threadId, user.id));
 
     try {
-      await upVoteThread(threadId);
+      await api.upVoteThread(threadId);
     } catch (message) {
       dispatch(upVoteThreadActionCreator(threadId, user.id));
       dispatch(upVoteDetailThreadActionCreator(threadId, user.id));
@@ -95,7 +86,7 @@ function asyncDownVoteThread(threadId) {
     dispatch(downVoteDetailThreadActionCreator(threadId, user.id));
 
     try {
-      await downVoteThread(threadId);
+      await api.downVoteThread(threadId);
     } catch (message) {
       dispatch(downVoteThreadActionCreator(threadId, user.id));
       dispatch(downVoteDetailThreadActionCreator(threadId, user.id));
@@ -114,7 +105,7 @@ function asyncNeutralizeVoteThread(threadId) {
     dispatch(neutralizeVoteDetailThreadActionCreator(threadId, user.id));
 
     try {
-      await neutralizeVoteThread(threadId);
+      await api.neutralizeVoteThread(threadId);
     } catch (message) {
       dispatch(neutralizeVoteThreadActionCreator(threadId, user.id));
       dispatch(neutralizeVoteDetailThreadActionCreator(threadId, user.id));
