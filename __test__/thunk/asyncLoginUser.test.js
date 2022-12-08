@@ -8,34 +8,34 @@
 
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
-import { addUserActionCreator } from '../user/action';
-import { asyncLoginUser } from './action';
+import { addUserActionCreator } from '../../states/user/action';
+import { asyncLoginUser } from '../../states/shared/action';
 
 const fakeSuccessfulLoginResponse = {
-  'status': 'success',
-  'message': 'ok',
-  'data': {
-      'token': 'Y78TybuG5rfTFgtu5r5YECrfUG5HR6t7',
-  }
+  status: 'success',
+  message: 'ok',
+  data: {
+    token: 'Y78TybuG5rfTFgtu5r5YECrfUG5HR6t7',
+  },
 };
 
 const fakeFailedLoginResponse = {
-  'status': 'fail',
-  'message': 'there was a problem while requesting',
-  'data': {}
+  status: 'fail',
+  message: 'there was a problem while requesting',
+  data: {},
 };
 
 const fakeSuccessGetUserResponse = {
-  'status': 'success',
-  'message': 'ok',
-  'data': {
-      'user': {
-          'id': 'john_doe',
-          'name': 'John Doe',
-          'email': 'john@example.com',
-          'avatar': 'https://generated-image-url.jpg'
-      }
-  }
+  status: 'success',
+  message: 'ok',
+  data: {
+    user: {
+      id: 'john_doe',
+      name: 'John Doe',
+      email: 'john@example.com',
+      avatar: 'https://generated-image-url.jpg',
+    },
+  },
 };
 
 const backupApi = {};
@@ -45,7 +45,7 @@ describe('test async login user', () => {
     backupApi.login = api.login;
     backupApi.seeOwnProfile = api.seeOwnProfile;
   });
-  
+
   afterEach(() => {
     api.login = backupApi.login;
     api.seeOwnProfile = backupApi.seeOwnProfile;
@@ -53,13 +53,13 @@ describe('test async login user', () => {
     delete backupApi.login;
     delete backupApi.seeOwnProfile;
   });
-  
+
   it('failed to receive user data due to non-API error and warning will be triggered', async () => {
     // arrage
-    api.login = () => Promise.reject('non-API error');
+    api.login = () => Promise.reject(new Error('non-API error'));
     const dispatch = jest.fn();
     window.alert = jest.fn();
-    
+
     // action
     await asyncLoginUser({
       email: 'someOne@gmail.com',
@@ -77,7 +77,7 @@ describe('test async login user', () => {
     api.login = () => Promise.resolve(fakeFailedLoginResponse);
     const dispatch = jest.fn();
     window.alert = jest.fn();
-    
+
     // action
     await asyncLoginUser({
       email: 'someOne@gmail.com',
@@ -95,7 +95,7 @@ describe('test async login user', () => {
     api.login = () => Promise.resolve(fakeSuccessfulLoginResponse);
     api.seeOwnProfile = () => Promise.resolve(fakeSuccessGetUserResponse);
     const dispatch = jest.fn();
-    
+
     // action
     await asyncLoginUser({
       email: 'someOne@gmail.com',

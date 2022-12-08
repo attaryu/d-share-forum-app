@@ -16,7 +16,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import mockRouter from 'next-router-mock';
 import React from 'react';
-import Searchbar from './Searchbar';
+import Searchbar from '../../components/Searchbar';
 
 jest.mock('next/router', () => require('next-router-mock'));
 

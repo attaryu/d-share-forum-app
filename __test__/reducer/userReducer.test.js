@@ -1,20 +1,20 @@
 /*
  Test Flow :
-  * Action type not specified 
+  * Action type not specified
   * Receive user data
     - failed receive user data
     - success receive user data
   * Remove data user
 */
 
-import { ActionType } from './action';
-import userReducer from './reducer';
+import { ActionType } from '../../states/user/action';
+import userReducer from '../../states/user/reducer';
 
 const globalUser = {
-  'id': 'john_doe',
-  'name': 'John Doe',
-  'email': 'john@example.com',
-  'avatar': 'https://generated-image-url.jpg',
+  id: 'john_doe',
+  name: 'John Doe',
+  email: 'john@example.com',
+  avatar: 'https://generated-image-url.jpg',
 };
 
 describe('test user reducer', () => {
@@ -38,8 +38,8 @@ describe('test user reducer', () => {
       payload: {
         message: 'failed message',
         status: 'fail',
-      }
-    }
+      },
+    };
 
     // action
     const nextState = userReducer(initialState, action);
@@ -55,8 +55,8 @@ describe('test user reducer', () => {
       type: ActionType.RECEIVE_USER,
       payload: {
         user: globalUser,
-      }
-    }
+      },
+    };
 
     // action
     const nextState = userReducer(initialState, action);
@@ -75,5 +75,5 @@ describe('test user reducer', () => {
 
     // assert
     expect(nextState).toEqual({});
-  })
-})
+  });
+});

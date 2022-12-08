@@ -21,7 +21,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "shorttest": "jest",
     "test": "jest --watch"
   },
   "eslintConfig": {

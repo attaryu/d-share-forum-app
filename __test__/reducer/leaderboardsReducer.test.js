@@ -5,36 +5,36 @@
     - return data leaderboards
 */
 
-import { ActionType } from './action';
-import leaderboardsReducer from './reducer';
+import { ActionType } from '../../states/leaderboards/action';
+import leaderboardsReducer from '../../states/leaderboards/reducer';
 
 const globalLeaderboards = [
   {
-    'user': {
-      'id': 'users-1',
-      'name': 'John Doe',
-      'email': 'john@example.com',
-      'avatar': 'https://generated-image-url.jpg',
+    user: {
+      id: 'users-1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      avatar: 'https://generated-image-url.jpg',
     },
-    'score': 10,
+    score: 10,
   },
   {
-    'user': {
-      'id': 'users-2',
-      'name': 'Jane Doe',
-      'email': 'jane@example.com',
-      'avatar': 'https://generated-image-url.jpg',
+    user: {
+      id: 'users-2',
+      name: 'Jane Doe',
+      email: 'jane@example.com',
+      avatar: 'https://generated-image-url.jpg',
     },
-    'score': 5,
-  }
-]
+    score: 5,
+  },
+];
 
 describe('test leaderboards reducer', () => {
   it('returns the initial state if no action is specified', () => {
     // arrage
     const initialState = {};
     const action = { type: 'UNKNOWN' };
-    
+
     // action
     const nextState = leaderboardsReducer(initialState, action);
 
@@ -49,9 +49,9 @@ describe('test leaderboards reducer', () => {
       type: ActionType.RECEIVE_LEADERBOARDS,
       payload: {
         leaderboards: globalLeaderboards,
-      }
+      },
     };
-    
+
     // action
     const nextState = leaderboardsReducer(initialState, action);
 

@@ -8,7 +8,7 @@
 
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
-import { receiveDetailThreadActionCreator, asyncReceiveDetailThread } from './action';
+import { receiveDetailThreadActionCreator, asyncReceiveDetailThread } from '../../states/detailThread/action';
 
 const fakeFailedDetailThreadResponse = {
   status: 'fail',

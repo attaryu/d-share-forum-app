@@ -14,20 +14,20 @@
     - pressing down vote again
 */
 
-import { ActionType } from './action';
-import threadsReducer from './reducer';
+import { ActionType } from '../../states/threads/action';
+import threadsReducer from '../../states/threads/reducer';
 
 const globalThread = {
-  'id': 'thread-1',
-  'title': 'Thread Pertama',
-  'body': 'Ini adalah thread pertama',
-  'category': 'General',
-  'createdAt': '2021-06-21T07:00:00.000Z',
-  'ownerId': 'users-1',
-  'upVotesBy': [],
-  'downVotesBy': [],
-  'totalComments': 0,
-}
+  id: 'thread-1',
+  title: 'Thread Pertama',
+  body: 'Ini adalah thread pertama',
+  category: 'General',
+  createdAt: '2021-06-21T07:00:00.000Z',
+  ownerId: 'users-1',
+  upVotesBy: [],
+  downVotesBy: [],
+  totalComments: 0,
+};
 
 describe('test threads reducer', () => {
   it('returns the initial value if no action is specified', () => {
@@ -48,36 +48,36 @@ describe('test threads reducer', () => {
     const action = {
       type: ActionType.RECEIVE_THREADS,
       payload: {
-        'threads': [
+        threads: [
           globalThread,
         ],
       },
-    }
+    };
 
     // action
     const nextState = threadsReducer(initialState, action);
 
     // assert
     expect(nextState).toEqual(action.payload.threads);
-  })
+  });
 
   it('adds a new thread if the action type is CREATE_THREAD', () => {
     // arrage
     const initialState = [
       {
         ...globalThread,
-        'id': 'thread-2',
-        'title': 'Thread Kedua',
-        'body': 'Ini adalah thread kedua',
-        'createdAt': '2022-06-21T07:00:00.000Z',
-        'ownerId': 'users-2',
+        id: 'thread-2',
+        title: 'Thread Kedua',
+        body: 'Ini adalah thread kedua',
+        createdAt: '2022-06-21T07:00:00.000Z',
+        ownerId: 'users-2',
       },
     ];
 
     const action = {
       type: ActionType.CREATE_THREAD,
       payload: {
-        'threads': [
+        threads: [
           globalThread,
         ],
       },
@@ -88,7 +88,7 @@ describe('test threads reducer', () => {
 
     // assert
     expect(nextState).toContain(action.payload.threads);
-  })
+  });
 
   it('adds user id in the upVotesBy property if the action type is UP_VOTE_THREAD', () => {
     // arrage
@@ -102,8 +102,8 @@ describe('test threads reducer', () => {
         threadId: 'thread-1',
         userId: 'users-2',
       },
-    }
-    
+    };
+
     // action
     const nextState = threadsReducer(initialState, action);
 
@@ -117,7 +117,7 @@ describe('test threads reducer', () => {
     const initialState = [
       {
         ...globalThread,
-        'downVotesBy': ['users-2'],
+        downVotesBy: ['users-2'],
       },
     ];
 
@@ -127,8 +127,8 @@ describe('test threads reducer', () => {
         threadId: 'thread-1',
         userId: 'users-2',
       },
-    }
-    
+    };
+
     // action
     const nextState = threadsReducer(initialState, action);
 
@@ -151,8 +151,8 @@ describe('test threads reducer', () => {
         threadId: 'thread-1',
         userId: 'users-2',
       },
-    }
-    
+    };
+
     // action
     const nextState = threadsReducer(initialState, action);
 
@@ -166,7 +166,7 @@ describe('test threads reducer', () => {
     const initialState = [
       {
         ...globalThread,
-        'upVotesBy': ['users-2'],
+        upVotesBy: ['users-2'],
       },
     ];
 
@@ -176,8 +176,8 @@ describe('test threads reducer', () => {
         threadId: 'thread-1',
         userId: 'users-2',
       },
-    }
-    
+    };
+
     // action
     const nextState = threadsReducer(initialState, action);
 
@@ -193,7 +193,7 @@ describe('test threads reducer', () => {
     const initialState = [
       {
         ...globalThread,
-        'upVotesBy': ['users-2'],
+        upVotesBy: ['users-2'],
       },
     ];
 
@@ -203,8 +203,8 @@ describe('test threads reducer', () => {
         threadId: 'thread-1',
         userId: 'users-2',
       },
-    }
-    
+    };
+
     // action
     const nextState = threadsReducer(initialState, action);
 
@@ -220,7 +220,7 @@ describe('test threads reducer', () => {
     const initialState = [
       {
         ...globalThread,
-        'downVotesBy': ['users-2'],
+        downVotesBy: ['users-2'],
       },
     ];
 
@@ -230,8 +230,8 @@ describe('test threads reducer', () => {
         threadId: 'thread-1',
         userId: 'users-2',
       },
-    }
-    
+    };
+
     // action
     const nextState = threadsReducer(initialState, action);
 

@@ -12,8 +12,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import PropTypes from 'prop-types';
 import React from 'react';
-import useSimpleState from '../hooks/useSimpleState';
-import InputWithIcon from './InputWithIcon';
+import useSimpleState from '../../hooks/useSimpleState';
+import InputWithIcon from '../../components/InputWithIcon';
 
 const icon = '/asset/email.avif';
 const type = 'text';
