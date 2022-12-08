@@ -11,7 +11,6 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
-
 import store from '../states';
 import { receiveDetailThreadActionCreator } from '../states/detailThread/action';
 import api from '../utils/api';

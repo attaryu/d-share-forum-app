@@ -2,8 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
+import getTime from '../utils/getTime';
 import pathName from '../utils/pathName';
 
 function HeaderThreadCard({ thread }) {
@@ -11,10 +11,7 @@ function HeaderThreadCard({ thread }) {
   const owner = users.find((user) => user.id === (thread.ownerId ?? thread.owner.id));
 
   const ranking = leaderboards.map((ranker) => ranker.user.id).indexOf(owner.id) + 1;
-  const time = moment(thread.createdAt).startOf('minute').fromNow();
-  const afterOneDayCheck = /([0-9]|a) (day|days)/gi.test(time)
-    ? moment(thread.createdAt).format('dddd, DD MMM YYYY')
-    : time;
+  const time = getTime(thread.createdAt);
   const iconTopRank = {
     1: '/asset/1st.avif',
     2: '/asset/2nd.avif',
@@ -32,7 +29,7 @@ function HeaderThreadCard({ thread }) {
         </div>
 
         <time className="block font-medium text-sm text-zinc-600">
-          {afterOneDayCheck}
+          {time}
         </time>
       </div>
     </div>

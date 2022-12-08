@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { IoIosSend } from 'react-icons/io';
+import { useDispatch } from 'react-redux';
 
 import useSimpleState from '../hooks/useSimpleState';
 
@@ -18,6 +18,7 @@ function CreateComment() {
   }
 
   const focusHandler = () => refFocus.current.focus();
+
   return (
     <form onSubmit={submitComment}>
       <label

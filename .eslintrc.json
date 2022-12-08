@@ -23,6 +23,7 @@
         "no-alert": "off",
         "linebreak-style": ["error", "windows"],
         "consistent-return": "off",
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "global-require": 0 
     }
 }

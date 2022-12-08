@@ -1,9 +1,9 @@
-import React from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
+import getTime from '../utils/getTime';
 import pathName from '../utils/pathName';
 
 function HeaderCommentCard({ comment }) {
@@ -11,11 +11,7 @@ function HeaderCommentCard({ comment }) {
   const owner = users.find((user) => user.id === (comment.ownerId ?? comment.owner.id));
 
   const ranking = leaderboards.map((ranker) => ranker.user.id).indexOf(owner.id) + 1;
-  const time = moment(comment.createdAt).startOf('minute').fromNow();
-  const selectedDay = /([0-9]|a) (day|days)/gi;
-  const afterOneDayCheck = selectedDay.test(time)
-    ? moment(comment.createdAt).format('dddd, DD MMM YYYY')
-    : time;
+  const time = getTime(comment.createdAt);
   const icons = {
     1: '/asset/1st.avif',
     2: '/asset/2nd.avif',
@@ -34,7 +30,7 @@ function HeaderCommentCard({ comment }) {
         <Link href={`/${pathName.PROFILE}/${comment.owner.id}`} className="font-bold text-lg leading-4 block">{comment.owner.name}</Link>
         {ranking < 3 && ranking !== 0 && <img src={icons[ranking]} alt={`Ranking ${ranking}`} className="w-5 ml-2" />}
         <time className="text-sm text-end font-medium text-zinc-500 ml-auto w-1/3">
-          {afterOneDayCheck}
+          {time}
         </time>
       </div>
     </div>
