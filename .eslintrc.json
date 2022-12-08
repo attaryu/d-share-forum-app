@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "jest/globals": true
+        "jest": true,
+        "cypress/globals": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -17,13 +18,15 @@
     },
     "plugins": [
         "react",
-        "jest"
+        "jest",
+        "cypress"
     ],
     "rules": {
         "no-alert": "off",
         "linebreak-style": ["error", "windows"],
         "consistent-return": "off",
         "react/jsx-props-no-spreading": "off",
-        "global-require": 0 
+        "global-require": 0 ,
+        "import/no-extraneous-dependencies": ["error", {"peerDependencies": true}]
     }
 }

@@ -21,7 +21,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "e2e": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +50,7 @@
     "cypress": "^11.2.0",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^27.1.6",
     "eslint-plugin-jsx-a11y": "^6.6.1",
