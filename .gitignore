@@ -6,6 +6,7 @@
 /.pnp
 .pnp.js
 .next
+.swc
 
 # testing
 /coverage

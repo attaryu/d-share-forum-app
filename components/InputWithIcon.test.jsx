@@ -9,11 +9,11 @@
 
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import PropTypes from 'prop-types';
 import userEvent from '@testing-library/user-event';
+import PropTypes from 'prop-types';
 import React from 'react';
-import InputWithIcon from './InputWithIcon';
 import useSimpleState from '../hooks/useSimpleState';
+import InputWithIcon from './InputWithIcon';
 
 const icon = '/asset/email.avif';
 const type = 'text';

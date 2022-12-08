@@ -32,7 +32,7 @@ function HeaderCommentCard({ comment }) {
 
       <div className="flex items-center pl-4 w-full">
         <Link href={`/${pathName.PROFILE}/${comment.owner.id}`} className="font-bold text-lg leading-4 block">{comment.owner.name}</Link>
-        {ranking <= 3 && <img src={icons[ranking]} alt={`Ranking ${ranking}`} className="w-5 ml-2" />}
+        {ranking < 3 && ranking !== 0 && <img src={icons[ranking]} alt={`Ranking ${ranking}`} className="w-5 ml-2" />}
         <time className="text-sm text-end font-medium text-zinc-500 ml-auto w-1/3">
           {afterOneDayCheck}
         </time>

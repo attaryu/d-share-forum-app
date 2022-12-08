@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { IoIosSend } from 'react-icons/io';
 
@@ -8,6 +8,7 @@ import { asyncCreateComment } from '../states/detailThread/action';
 
 function CreateComment() {
   const [content, setContent] = useSimpleState('');
+  const refFocus = useRef();
   const dispatch = useDispatch();
 
   function submitComment(event) {
@@ -16,17 +17,20 @@ function CreateComment() {
     setContent('');
   }
 
+  const focusHandler = () => refFocus.current.focus();
   return (
     <form onSubmit={submitComment}>
       <label
         htmlFor="comment"
       >
-        <p className="font-semibold mb-3 text-xl">Make a comment</p>
+        <p className="font-semibold mb-3 text-xl" onClick={focusHandler} aria-hidden>Make a comment</p>
+        <p className="sr-only">Make a comment</p>
         <textarea
           name="comment"
           className="resize-none w-full h-24 p-3 leading-5 outline-none shadow-xl rounded-lg"
           onChange={setContent}
           value={content}
+          ref={refFocus}
           required
         >
           {}

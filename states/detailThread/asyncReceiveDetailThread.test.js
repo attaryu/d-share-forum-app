@@ -11,44 +11,44 @@ import api from '../../utils/api';
 import { receiveDetailThreadActionCreator, asyncReceiveDetailThread } from './action';
 
 const fakeFailedDetailThreadResponse = {
-  'status': 'fail',
-  'message': 'there was a problem while requesting',
-  'data': {}
+  status: 'fail',
+  message: 'there was a problem while requesting',
+  data: {},
 };
 
 const fakeSuccessDetailThreadResponse = {
-  'status': 'success',
-  'message': 'ok',
-  'data': {
-      'detailThread': {
-          'id': 'thread-1',
-          'title': 'Thread Pertama',
-          'body': 'Ini adalah thread pertama',
-          'category': 'General',
-          'createdAt': '2021-06-21T07:00:00.000Z',
-          'owner': {
-            'id': 'users-1',
-            'name': 'John Doe',
-            'avatar': 'https://generated-image-url.jpg'
+  status: 'success',
+  message: 'ok',
+  data: {
+    detailThread: {
+      id: 'thread-1',
+      title: 'Thread Pertama',
+      body: 'Ini adalah thread pertama',
+      category: 'General',
+      createdAt: '2021-06-21T07:00:00.000Z',
+      owner: {
+        id: 'users-1',
+        name: 'John Doe',
+        avatar: 'https://generated-image-url.jpg',
+      },
+      upVotesBy: [],
+      downVotesBy: [],
+      comments: [
+        {
+          id: 'comment-1',
+          content: 'Ini adalah komentar pertama',
+          createdAt: '2021-06-21T07:00:00.000Z',
+          owner: {
+            id: 'users-1',
+            name: 'John Doe',
+            avatar: 'https://generated-image-url.jpg',
           },
-          'upVotesBy': [],
-          'downVotesBy': [],
-          'comments': [
-            {
-              'id': 'comment-1',
-              'content': 'Ini adalah komentar pertama',
-              'createdAt': '2021-06-21T07:00:00.000Z',
-              'owner': {
-                'id': 'users-1',
-                'name': 'John Doe',
-                'avatar': 'https://generated-image-url.jpg'
-              },
-              'upVotesBy': [],
-              'downVotesBy': []
-            }   
-          ]   
-      }
-  }
+          upVotesBy: [],
+          downVotesBy: [],
+        },
+      ],
+    },
+  },
 };
 
 const backupApi = {};
@@ -57,19 +57,19 @@ describe('test async receive detail thread', () => {
   beforeEach(() => {
     backupApi.seeDetailThread = api.seeDetailThread;
   });
-  
+
   afterEach(() => {
     api.seeDetailThread = backupApi.seeDetailThread;
 
     delete backupApi.seeDetailThread;
   });
-  
+
   it('failed to receive detail thread due to non-API error and warning will be triggered', async () => {
     // arrage
-    api.seeDetailThread = () => Promise.reject('non-API error');
+    api.seeDetailThread = () => Promise.reject(new Error('non-API error'));
     const dispatch = jest.fn();
     window.alert = jest.fn();
-    
+
     // action
     await asyncReceiveDetailThread()(dispatch);
 
@@ -84,7 +84,7 @@ describe('test async receive detail thread', () => {
     api.seeDetailThread = () => Promise.resolve(fakeFailedDetailThreadResponse);
     const dispatch = jest.fn();
     window.alert = jest.fn();
-    
+
     // action
     await asyncReceiveDetailThread()(dispatch);
 
@@ -98,13 +98,14 @@ describe('test async receive detail thread', () => {
     // arrage
     api.seeDetailThread = () => Promise.resolve(fakeSuccessDetailThreadResponse);
     const dispatch = jest.fn();
-    
+
     // action
     await asyncReceiveDetailThread()(dispatch);
 
     // assert
     expect(dispatch).toBeCalledWith(showLoading());
-    expect(dispatch).toBeCalledWith(receiveDetailThreadActionCreator(fakeSuccessDetailThreadResponse.data));
+    expect(dispatch)
+      .toBeCalledWith(receiveDetailThreadActionCreator(fakeSuccessDetailThreadResponse.data));
     expect(dispatch).toBeCalledWith(hideLoading());
   });
 });
