@@ -26,11 +26,11 @@ function Navigation() {
         href={`/${pathName.LEADERBOARDS}`}
         className="text-2xl font-normal text-white"
       >
-        { pathname === `/${pathName.LEADERBOARDS}` ? <MdLeaderboard /> : <MdOutlineLeaderboard /> }
+        { pathname === `/${pathName.LEADERBOARDS}` ? <MdLeaderboard className="text-white" /> : <MdOutlineLeaderboard className="text-white" /> }
       </Link>
 
       <Link href="/" className="text-2xl font-normal text-white">
-        { pathname === '/' ? <AiFillHome /> : <AiOutlineHome /> }
+        { pathname === '/' ? <AiFillHome className="text-white" /> : <AiOutlineHome className="text-white" /> }
       </Link>
 
       {!checkEmptyObject(user) && (
@@ -38,7 +38,7 @@ function Navigation() {
           href={`/${pathName.THREAD}/create-thread`}
           className="text-2xl font-normal text-white"
         >
-          { pathname === `/${pathName.THREAD}/create-thread` ? <MdAddBox /> : <MdOutlineAddBox /> }
+          { pathname === `/${pathName.THREAD}/create-thread` ? <MdAddBox className="text-white" /> : <MdOutlineAddBox className="text-white" /> }
         </Link>
       )}
 
@@ -47,7 +47,7 @@ function Navigation() {
         className="text-2xl font-normal text-white"
       >
         {checkEmptyObject(user)
-          ? <FiLogIn />
+          ? <FiLogIn className="text-white" />
           : (
             <img
               src={user.avatar}
