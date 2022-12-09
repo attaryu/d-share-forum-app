@@ -23,6 +23,7 @@ function ButtonThreadCard({ thread, withComment }) {
     <div className="flex item-center justify-around mt-5 border-t-4 border-t-zinc-300 pt-5">
       <button
         type="button"
+        name={thread.downVotesBy.includes(user.id || '') ? 'neutralizeVote' : 'upVote'}
         className="flex items-center gap-3 text-xl"
         onClick={thread.upVotesBy.includes(user.id || '') ? neutralizeVote : upVote}
       >
@@ -32,6 +33,7 @@ function ButtonThreadCard({ thread, withComment }) {
 
       <button
         type="button"
+        name={thread.downVotesBy.includes(user.id || '') ? 'neutralizeVote' : 'downVote'}
         className="flex items-center gap-3 text-xl"
         onClick={thread.downVotesBy.includes(user.id || '') ? neutralizeVote : downVote}
       >

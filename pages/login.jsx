@@ -1,22 +1,23 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FiLogIn } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InputWithIcon from '../components/InputWithIcon';
-import Loading from '../components/Loading';
-import useAuthCheck from '../hooks/useAuthCheck';
 
 import useSimpleState from '../hooks/useSimpleState';
 import { asyncLoginUser } from '../states/shared/action';
+import { asyncAddUser } from '../states/user/action';
+import checkEmptyObject from '../utils/checkEmptyObject';
 import pathName from '../utils/pathName';
 
 function Login() {
+  const { user } = useSelector((states) => states);
   const [email, setEmail] = useSimpleState('');
   const [password, setPassword] = useSimpleState('');
-  const [auth] = useAuthCheck();
+  const ref = useRef(true);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -26,12 +27,13 @@ function Login() {
   }
 
   useEffect(() => {
-    if (auth) router.push('/');
-  }, [auth]);
+    if (!checkEmptyObject(user)) router.push('/');
+    if (ref.current) {
+      dispatch(asyncAddUser());
+    }
 
-  if (auth) {
-    return <Loading />;
-  }
+    return () => { ref.current = false; };
+  }, [user]);
 
   return (
     <>
