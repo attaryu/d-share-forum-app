@@ -42,9 +42,11 @@ function ButtonThreadCard({ thread, withComment }) {
       </button>
 
       {withComment && (
-        <Link href={`/${pathName.THREAD}/${thread.id}`} className="flex items-center gap-3 text-xl">
-          <BsChatLeftDots />
-          <span className="font-medium text-base">{thread.totalComments}</span>
+        <Link href={`/${pathName.THREAD}/${thread.id}`}>
+          <span className="flex items-center gap-3 text-xl">
+            <BsChatLeftDots />
+            <span className="font-medium text-base">{thread.totalComments}</span>
+          </span>
         </Link>
       )}
     </div>

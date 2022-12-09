@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Navigation from '../components/Navigation';
-import Wrapper from './utils/ProviderWrapper';
+import Wrapper from './utils/Wrapper';
 import { addUserActionCreator } from '../states/user/action';
 
 export default {
@@ -20,7 +20,7 @@ const state = addUserActionCreator({
 
 function WithAuth() {
   return (
-    <Wrapper value={state}>
+    <Wrapper actions={[state]}>
       <Navigation />
     </Wrapper>
   );
@@ -28,7 +28,7 @@ function WithAuth() {
 
 function WithoutAuth() {
   return (
-    <Wrapper value={addUserActionCreator({ user: {} })}>
+    <Wrapper actions={[addUserActionCreator({ user: {} })]}>
       <Navigation />
     </Wrapper>
   );

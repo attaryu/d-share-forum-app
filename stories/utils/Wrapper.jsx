@@ -5,8 +5,10 @@ import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider/next
 
 import store from '../../states';
 
-function Wrapper({ children, value }) {
-  store.dispatch(value);
+function Wrapper({ children, actions }) {
+  actions.forEach((action) => {
+    store.dispatch(action);
+  });
 
   return (
     <MemoryRouterProvider url="/">
@@ -19,7 +21,7 @@ function Wrapper({ children, value }) {
 
 Wrapper.propTypes = {
   children: PropTypes.element.isRequired,
-  value: PropTypes.objectOf(Object).isRequired,
+  actions: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default Wrapper;
