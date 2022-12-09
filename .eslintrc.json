@@ -24,7 +24,7 @@
     ],
     "rules": {
         "no-alert": "off",
-        "linebreak-style": ["error", "windows"],
+        "linebreak-style": "off",
         "consistent-return": "off",
         "react/jsx-props-no-spreading": "off",
         "global-require": 0 ,
