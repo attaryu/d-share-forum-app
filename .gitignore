@@ -6,7 +6,6 @@
 /.pnp
 .pnp.js
 .next
-.swc
 
 # testing
 /coverage
@@ -24,3 +23,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# custom
+screenshoot
+.swc
