@@ -1,11 +1,14 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true,
+        "cypress/globals": true
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "plugin:storybook/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -15,11 +18,16 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jest",
+        "cypress"
     ],
     "rules": {
         "no-alert": "off",
         "linebreak-style": ["error", "windows"],
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "react/jsx-props-no-spreading": "off",
+        "global-require": 0 ,
+        "import/no-extraneous-dependencies": ["error", {"peerDependencies": true}]
     }
 }
