@@ -12,7 +12,7 @@
       searching 'introduction' and found the thread with the introduction category
 */
 
-describe('Home page without auth test flow', () => {
+describe('Home page test flow', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000');
   });
