@@ -25,5 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # custom
-screenshoot
+screenshot
 .swc
