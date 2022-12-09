@@ -31,7 +31,7 @@ function InputWithIcon({
 }
 
 InputWithIcon.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.oneOf(['/asset/email.avif', '/asset/password.avif', '/asset/name.avif']).isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
