@@ -24,7 +24,7 @@
   - Home page
 <br>
 
-# React Ecosystem 🧩
+# React Ecosystem 🌱
 - Next JS
 - TailwinCSS
 - Storybook
